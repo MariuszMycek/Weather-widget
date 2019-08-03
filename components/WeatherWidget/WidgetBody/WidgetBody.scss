@@ -1,0 +1,55 @@
+@import '../../../styles/variables';
+
+.widget-body {
+  box-shadow: $widget-body-shadow;
+  padding: 20px 0;
+
+  &__city-name {
+    font-size: 48px;
+  }
+
+  &__spinner-wrapper {
+    margin: 25px;
+  }
+
+  .daily-weather-info {
+    &__basic-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__detailed-info {
+      margin-top: 10px;
+    }
+
+    &__img-and-temp {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    &__temperature {
+      font-size: 44px;
+      display: flex;
+      transform: translateY(2px);
+
+      span {
+        font-size: 18px;
+        align-self: flex-start;
+        transform: translateY(3px);
+      }
+    }
+
+    &__additional-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__additional-info-item {
+      margin-bottom: 10px;
+    }
+  }
+
+  .multi-day-forecast {
+    margin-top: 15px;
+  }
+}

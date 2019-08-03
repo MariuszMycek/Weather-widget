@@ -1,0 +1,14 @@
+@import 'variables';
+@import 'mixins';
+
+@import '~bootstrap-scss/bootstrap.scss';
+
+// All global styles are imported in head.js component
+*{
+  line-height: 1;
+}
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Avenir Next, Avenir, Helvetica,
+    sans-serif;
+}

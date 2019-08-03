@@ -1,0 +1,25 @@
+.widget-loader {
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+}
+
+.widget-no-data-info {
+  @extend .widget-loader;
+}
+
+.weather-widget {
+  position: relative;
+  margin-top: 60px;
+
+  &__widget-body-wrapper {
+    margin-top: 30px;
+    max-width: 992px;
+  }
+
+  &__spinner-wrapper {
+    position: absolute;
+    left: 150px;
+    top: 5px;
+  }
+}
