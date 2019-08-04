@@ -10,7 +10,7 @@ import WidgetBody from './WidgetBody/WidgetBody';
 
 import './WeatherWidget.scss';
 
-const API = 'http://dev-weather-api.azurewebsites.net/api/city';
+const API = 'https://dev-weather-api.azurewebsites.net/api/city';
 
 class WeatherWidget extends Component {
   constructor(props) {
@@ -65,7 +65,6 @@ class WeatherWidget extends Component {
       activeDayIndex,
       cityDataLoading,
     } = this.state;
-    console.log(this.state.cityData);
     return (
       <Container fluid>
         <div className="weather-widget">

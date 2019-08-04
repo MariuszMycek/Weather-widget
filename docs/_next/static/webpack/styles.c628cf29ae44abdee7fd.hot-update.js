@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["styles"],{
+webpackHotUpdate("styles",{
 
 /***/ "./components/Spinner/Spinner.scss":
 /*!*****************************************!*\
@@ -185,5 +185,5 @@
 
 /***/ })
 
-}]);
-//# sourceMappingURL=styles.js.map
+})
+//# sourceMappingURL=styles.c628cf29ae44abdee7fd.hot-update.js.map

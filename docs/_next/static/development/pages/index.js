@@ -274,7 +274,7 @@ var _jsxFileName = "G:\\programowanie\\zadanie rekrutacyjne - coffee mug\\Weathe
 
 
 
-var API = 'http://dev-weather-api.azurewebsites.net/api/city';
+var API = 'https://dev-weather-api.azurewebsites.net/api/city';
 
 var WeatherWidget =
 /*#__PURE__*/
@@ -344,19 +344,18 @@ function (_Component) {
           cityData = _this$state.cityData,
           activeDayIndex = _this$state.activeDayIndex,
           cityDataLoading = _this$state.cityDataLoading;
-      console.log(_this.state.cityData);
       return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap_Container__WEBPACK_IMPORTED_MODULE_12___default.a, {
         fluid: true,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 70
+          lineNumber: 69
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "weather-widget",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 71
+          lineNumber: 70
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(react_bootstrap_DropdownButton__WEBPACK_IMPORTED_MODULE_10___default.a, {
@@ -365,7 +364,7 @@ function (_Component) {
         variant: "info",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 72
+          lineNumber: 71
         },
         __self: this
       }, citiesData.map(function (city) {
@@ -377,7 +376,7 @@ function (_Component) {
           active: activeCity.id === city.id,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 78
+            lineNumber: 77
           },
           __self: this
         }, city.name);
@@ -385,21 +384,21 @@ function (_Component) {
         className: "weather-widget__spinner-wrapper",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 88
+          lineNumber: 87
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_Spinner_Spinner__WEBPACK_IMPORTED_MODULE_13__["default"], {
         height: 26,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 89
+          lineNumber: 88
         },
         __self: this
       })) : null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "weather-widget__widget-body-wrapper",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 92
+          lineNumber: 91
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_WidgetBody_WidgetBody__WEBPACK_IMPORTED_MODULE_14__["default"], {
@@ -410,7 +409,7 @@ function (_Component) {
         cityDataLoading: cityDataLoading,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 93
+          lineNumber: 92
         },
         __self: this
       }))));
@@ -421,7 +420,7 @@ function (_Component) {
         className: "widget-no-data-info",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 107
+          lineNumber: 106
         },
         __self: this
       }, "Sorry, we cannot get cities list");
