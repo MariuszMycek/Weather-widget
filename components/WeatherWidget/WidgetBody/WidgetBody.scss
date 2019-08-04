@@ -5,6 +5,10 @@
   box-shadow: $widget-body-shadow;
   padding: 20px 0;
 
+  @include media-breakpoint-down(sm) {
+    padding-bottom: 0;
+  }
+
   &__city-name {
     font-size: 54px;
 
