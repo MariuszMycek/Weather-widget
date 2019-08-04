@@ -51,67 +51,72 @@ class WeatherWidget extends Component {
     this.setState({ activeDayIndex });
   };
 
-  render() {
+  renderSpinner = () => (
+    <div className="widget-loader">
+      <Spinner height={50} />
+    </div>
+  );
+
+  renderWidget = () => {
     const {
-      isLoading,
       citiesData,
       activeCity,
       cityData,
       activeDayIndex,
       cityDataLoading,
     } = this.state;
+    console.log(this.state.cityData);
+    return (
+      <Container fluid>
+        <div className="weather-widget">
+          <DropdownButton
+            id="dropdown-basic-button"
+            title="Choose a city "
+            variant="info"
+          >
+            {citiesData.map(city => (
+              <Dropdown.Item
+                key={city.id}
+                onClick={() => this.onSelectHandler(city)}
+                active={activeCity.id === city.id}
+              >
+                {city.name}
+              </Dropdown.Item>
+            ))}
+          </DropdownButton>
+          {cityDataLoading ? (
+            <div className="weather-widget__spinner-wrapper">
+              <Spinner height={26} />
+            </div>
+          ) : null}
+          <div className="weather-widget__widget-body-wrapper">
+            <WidgetBody
+              cityData={cityData}
+              activeCity={activeCity}
+              setActiveDayIndex={this.setActiveDayIndex}
+              activeDayIndex={activeDayIndex}
+              cityDataLoading={cityDataLoading}
+            />
+          </div>
+        </div>
+      </Container>
+    );
+  };
+
+  renderErrorInfo = () => (
+    <div className="widget-no-data-info">Sorry, we cannot get cities list</div>
+  );
+
+  render() {
+    const { isLoading, citiesData } = this.state;
 
     if (isLoading) {
-      return (
-        <div className="widget-loader">
-          <Spinner height={50} />
-        </div>
-      );
+      return this.renderSpinner();
     }
-
     if (citiesData) {
-      return (
-        <Container fluid>
-          <div className="weather-widget">
-            <DropdownButton
-              id="dropdown-basic-button"
-              title="Choose a city"
-              variant="info"
-            >
-              {citiesData.map(city => (
-                <Dropdown.Item
-                  key={city.id}
-                  onClick={() => this.onSelectHandler(city)}
-                  active={activeCity.id === city.id}
-                >
-                  {city.name}
-                </Dropdown.Item>
-              ))}
-            </DropdownButton>
-            {cityDataLoading ? (
-              <div className="weather-widget__spinner-wrapper">
-                <Spinner height={26} />
-              </div>
-            ) : null}
-            <div className="weather-widget__widget-body-wrapper">
-              <WidgetBody
-                cityData={cityData}
-                activeCity={activeCity}
-                setActiveDayIndex={this.setActiveDayIndex}
-                activeDayIndex={activeDayIndex}
-                cityDataLoading={cityDataLoading}
-              />
-            </div>
-          </div>
-        </Container>
-      );
+      return this.renderWidget();
     }
-
-    return (
-      <div className="widget-no-data-info">
-        Sorry, we cannot get cities list
-      </div>
-    );
+    return this.renderErrorInfo();
   }
 }
 

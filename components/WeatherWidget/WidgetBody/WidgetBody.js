@@ -36,7 +36,7 @@ const WidgetBody = ({
     return <div>Sorry, we cannot get city data</div>;
   }
 
-  if (cityData.length) {
+  if (cityData && cityData.length) {
     const dailyData = cityData[activeDayIndex];
     const date = moment(dailyData.date).format('dddd[, ]MMMM[ ]Do');
     const weatherType = formatType(dailyData.type);
@@ -51,12 +51,14 @@ const WidgetBody = ({
           <div className="daily-weather-info">
             <Row>
               <Col className="daily-weather-info__basic-info">
-                <span>{date}</span>
-                <span>{weatherType}</span>
+                <span className="daily-weather-info__date">{date}</span>
+                <span className="daily-weather-info__weather-type">
+                  {weatherType}
+                </span>
               </Col>
             </Row>
             <Row className="daily-weather-info__detailed-info">
-              <Col className="daily-weather-info__img-and-temp">
+              <Col xs="6" className="daily-weather-info__img-and-temp">
                 <div className="daily-weather-info__weather-image">
                   <img
                     src={`/static/assets/images/${dailyData.type}.png`}
@@ -64,36 +66,59 @@ const WidgetBody = ({
                   />
                 </div>
                 <div className="daily-weather-info__temperature">
-                  {dailyData.temperature} <span>&deg;F</span>
+                  <span className="temperature__count">
+                    {dailyData.temperature}
+                  </span>
+                  <span className="temperature__degree-type">&deg;C</span>
                 </div>
               </Col>
-              <Col className="daily-weather-info__additional-info">
-                <span className="daily-weather-info__additional-info-item">
-                  Precipitation: {dailyData.precipitation}%
-                </span>
-                <span className="daily-weather-info__additional-info-item">
-                  Humidity: {dailyData.humidity}%
-                </span>
-                <span className="daily-weather-info__additional-info-item">
-                  Wind: {dailyData.windInfo.speed} mph{' '}
-                  {dailyData.windInfo.direction}
-                </span>
-                <span className="daily-weather-info__additional-info-item">
-                  Pollen Count: {dailyData.pollenCount}
-                </span>
+              <Col xs="6" className="daily-weather-info__additional-info">
+                <div className="daily-weather-info__additional-info-item-wrapper">
+                  <span className="daily-weather-info__additional-info-name">
+                    Precipitation:{' '}
+                  </span>
+                  <span className="daily-weather-info__additional-info-content">
+                    {dailyData.precipitation}%
+                  </span>
+                </div>
+                <div className="daily-weather-info__additional-info-item-wrapper">
+                  <span className="daily-weather-info__additional-info-name">
+                    Humidity:{' '}
+                  </span>
+                  <span className="daily-weather-info__additional-info-content">
+                    {dailyData.humidity}%
+                  </span>
+                </div>
+                <div className="daily-weather-info__additional-info-item-wrapper">
+                  <span className="daily-weather-info__additional-info-name">
+                    Wind:{' '}
+                  </span>
+                  <span className="daily-weather-info__additional-info-content">
+                    {dailyData.windInfo.speed} mph{' '}
+                    {dailyData.windInfo.direction}
+                  </span>
+                </div>
+                <div className="daily-weather-info__additional-info-item-wrapper">
+                  <span className="daily-weather-info__additional-info-name">
+                    Pollen Count:{' '}
+                  </span>
+                  <span className="daily-weather-info__additional-info-content">
+                    {dailyData.pollenCount}
+                  </span>
+                </div>
               </Col>
             </Row>
           </div>
           <div className="multi-day-forecast">
             <Row>
               {cityData.map((day, i) => (
-                <Col key={day.date} xs="12" md>
-                  <DayCard
-                    day={day}
-                    i={i}
-                    setActiveDayIndex={setActiveDayIndex}
-                  />
-                </Col>
+                <DayCard
+                  key={day.date}
+                  day={day}
+                  i={i}
+                  setActiveDayIndex={setActiveDayIndex}
+                  activeDayIndex={activeDayIndex}
+                />
               ))}
             </Row>
           </div>

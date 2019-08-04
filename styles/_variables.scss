@@ -1,2 +1,24 @@
+// backgrounds
+$day-card-bg: #fff;
+
 // shadows
 $widget-body-shadow: 2px 2px 8px #b2bec3;
+$day-card-hover-shadow: 0 0 8px #b2bec3;
+
+// font colors
+$font-dark: #2d3436;
+$font-dark-grey: lighten(
+  $color: $font-dark,
+  $amount: 25,
+);
+$font-light-grey: lighten(
+  $color: $font-dark,
+  $amount: 40,
+);
+
+// borders
+$border-thin-grey: 1px solid
+  lighten(
+    $color: #2d3436,
+    $amount: 60,
+  );

@@ -1,11 +1,16 @@
 @import '../../../styles/variables';
+@import '../../../styles/mixins';
 
 .widget-body {
   box-shadow: $widget-body-shadow;
   padding: 20px 0;
 
   &__city-name {
-    font-size: 48px;
+    font-size: 54px;
+
+    @include media-breakpoint-down(xs) {
+      font-size: 44px;
+    }
   }
 
   &__spinner-wrapper {
@@ -16,6 +21,16 @@
     &__basic-info {
       display: flex;
       flex-direction: column;
+      font-weight: 700;
+      color: $font-dark-grey;
+
+      @include media-breakpoint-down(xs) {
+        font-size: 12px;
+      }
+    }
+
+    &__date {
+      margin-bottom: 8px;
     }
 
     &__detailed-info {
@@ -24,32 +39,79 @@
 
     &__img-and-temp {
       display: flex;
-      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    &__weather-image {
+      img {
+        @include media-breakpoint-down(xs) {
+          width: 90%;
+        }
+      }
     }
 
     &__temperature {
-      font-size: 44px;
       display: flex;
-      transform: translateY(2px);
+      font-weight: 600;
+      transform: translateY(-2px);
 
-      span {
+      @include media-breakpoint-down(xs) {
+        transform: translateY(0);
+      }
+
+      .temperature__count {
+        margin-left: 5px;
+        font-size: 44px;
+
+        @include media-breakpoint-down(xs) {
+          font-size: 32px;
+          margin-left: 3px;
+        }
+      }
+
+      .temperature__degree-type {
         font-size: 18px;
         align-self: flex-start;
         transform: translateY(3px);
+        color: $font-light-grey;
+        margin-left: 5px;
+
+        @include media-breakpoint-down(xs) {
+          font-size: 12px;
+          margin-left: 2px;
+        }
       }
     }
 
     &__additional-info {
       display: flex;
       flex-direction: column;
+
+      @include media-breakpoint-down(xs) {
+        font-size: 12px;
+      }
     }
 
-    &__additional-info-item {
+    &__additional-info-item-wrapper {
       margin-bottom: 10px;
+      color: $font-light-grey;
+
+      @include media-breakpoint-down(xs) {
+        margin-bottom: 5px;
+      }
+    }
+
+    &__additional-info-name {
+      font-weight: 600;
+    }
+
+    &__additional-info-content {
+      color: $font-dark-grey;
+      font-weight: 700;
     }
   }
 
   .multi-day-forecast {
-    margin-top: 15px;
+    margin-top: 10px;
   }
 }
