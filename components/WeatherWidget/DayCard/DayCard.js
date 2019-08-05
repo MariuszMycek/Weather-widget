@@ -8,6 +8,7 @@ import Col from 'react-bootstrap/Col';
 import './DayCard.scss';
 
 const DayCard = ({ day, i, setActiveDayIndex, activeDayIndex }) => {
+  // handling class names for Day Card in mobile view
   const dayCardWrapperStyle =
     activeDayIndex === i
       ? 'day-card-wrapper day-card-wrapper--active'
@@ -22,6 +23,7 @@ const DayCard = ({ day, i, setActiveDayIndex, activeDayIndex }) => {
         <Row noGutters>
           <Col xs="4" sm="3" md="12" className="day-card__item">
             <div className="day-card__day-name">
+              {/* Displaying "Today" if i(index) === 0, and week day name for other days */}
               {i === 0 ? (
                 <span>Today</span>
               ) : (

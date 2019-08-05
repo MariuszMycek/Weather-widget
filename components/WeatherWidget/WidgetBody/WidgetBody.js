@@ -8,17 +8,21 @@ import DayCard from '../DayCard/DayCard';
 
 import './WidgetBody.scss';
 
+// function for formating weather type name received from API
 function formatType(type) {
+  // adding space between words
   const withSpace =
     type !== 'RainLight'
       ? type.replace(/([a-z])(?=[A-Z])/g, '$1 ')
-      : type
+      : // reversing 'RainLight' to 'Light Rain'
+        type
           .replace(/([a-z])(?=[A-Z])/g, '$1 ')
           .split(' ')
           .reverse()
           .join(' ');
-
+  // changing letters to lower case
   const toLowerCase = withSpace.toLowerCase();
+  // changing first letter to capital one
   const capitalized =
     toLowerCase.charAt(0).toUpperCase() + toLowerCase.slice(1);
   return capitalized;
@@ -30,11 +34,14 @@ const WidgetBody = ({
   activeDayIndex,
   cityDataLoading,
 }) => {
+  // if there is a problem with fething chosen city data
   if (!cityDataLoading && !cityData) {
     return <div>Sorry, we cannot get city data</div>;
   }
 
+  // if everything is ok - cityData is not null or empty array
   if (cityData && cityData.length) {
+    // data for currently displayed day
     const dailyData = cityData[activeDayIndex];
     const date = moment(dailyData.date).format('dddd[, ]MMMM[ ]Do');
     const weatherType = formatType(dailyData.type);
@@ -102,6 +109,7 @@ const WidgetBody = ({
         </div>
         <div className="multi-day-forecast">
           <Row>
+            {/* Rendering weather data for multi day forecast */}
             {cityData.map((day, i) => (
               <DayCard
                 key={day.date}
