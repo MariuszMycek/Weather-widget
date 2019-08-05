@@ -2,7 +2,7 @@
 @import '../../../styles/mixins';
 
 .day-card-wrapper {
-  background: $day-card-bg;
+  background: $widget-bg;
 
   @include media-breakpoint-down(sm) {
     transition: all 0.2s ease-out;

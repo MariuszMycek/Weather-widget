@@ -1,5 +1,5 @@
 // backgrounds
-$day-card-bg: #fff;
+$widget-bg: #fff;
 
 // shadows
 $widget-body-shadow: 2px 2px 8px #b2bec3;
@@ -15,6 +15,7 @@ $font-light-grey: lighten(
   $color: $font-dark,
   $amount: 40,
 );
+$font-white: #fff;
 
 // borders
 $border-thin-grey: 1px solid
