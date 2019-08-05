@@ -1,7 +1,7 @@
 ### An example deployment is running [here](https://weather-widget.mmycek83.now.sh).
 
 Application displays weather data for cities fetched from external API. 
-You can choose city by cklicking on dropdown menu.
+You can choose city by clicking on dropdown menu.
 Additionally you can display detailed weather data for next few days by clicking on day card
 you are interested.
 
