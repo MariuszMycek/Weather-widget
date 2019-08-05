@@ -2,21 +2,6 @@
 @import '../../../styles/mixins';
 
 .widget-body {
-  box-shadow: $widget-body-shadow;
-  padding: 20px 0;
-
-  @include media-breakpoint-down(sm) {
-    padding-bottom: 0;
-  }
-
-  &__city-name {
-    font-size: 54px;
-
-    @include media-breakpoint-down(xs) {
-      font-size: 44px;
-    }
-  }
-
   &__spinner-wrapper {
     margin: 25px;
   }

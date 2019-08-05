@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import fetch from 'isomorphic-unfetch';
 import moment from 'moment';
 
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown';
 import Container from 'react-bootstrap/Container';
 import Spinner from '../Spinner/Spinner';
 import WidgetBody from './WidgetBody/WidgetBody';
+import CustomDropdown from '../CustomDropdown/CustomDropdown';
 
 import './WeatherWidget.scss';
 
@@ -53,7 +52,7 @@ class WeatherWidget extends Component {
 
   renderSpinner = () => (
     <div className="widget-loader">
-      <Spinner height={50} />
+      <Spinner height="50px" />
     </div>
   );
 
@@ -68,34 +67,28 @@ class WeatherWidget extends Component {
     return (
       <Container fluid>
         <div className="weather-widget">
-          <DropdownButton
-            id="dropdown-basic-button"
-            title="Choose a city "
-            variant="info"
-          >
-            {citiesData.map(city => (
-              <Dropdown.Item
-                key={city.id}
-                onClick={() => this.onSelectHandler(city)}
-                active={activeCity.id === city.id}
-              >
-                {city.name}
-              </Dropdown.Item>
-            ))}
-          </DropdownButton>
-          {cityDataLoading ? (
-            <div className="weather-widget__spinner-wrapper">
-              <Spinner height={26} />
-            </div>
-          ) : null}
-          <div className="weather-widget__widget-body-wrapper">
-            <WidgetBody
-              cityData={cityData}
-              activeCity={activeCity}
-              setActiveDayIndex={this.setActiveDayIndex}
-              activeDayIndex={activeDayIndex}
-              cityDataLoading={cityDataLoading}
-            />
+          <div className="weather-widget__header">
+            <Container fluid>
+              <CustomDropdown
+                activeCity={activeCity}
+                citiesData={citiesData}
+                onSelectHandler={this.onSelectHandler}
+                cityDataLoading={cityDataLoading}
+              />
+            </Container>
+          </div>
+          <div className="weather-widget__body">
+            <Container fluid>
+              <WidgetBody
+                cityData={cityData}
+                citiesData={citiesData}
+                activeCity={activeCity}
+                setActiveDayIndex={this.setActiveDayIndex}
+                activeDayIndex={activeDayIndex}
+                cityDataLoading={cityDataLoading}
+                onSelectHandler={this.onSelectHandler}
+              />
+            </Container>
           </div>
         </div>
       </Container>

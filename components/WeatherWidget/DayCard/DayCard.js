@@ -14,7 +14,11 @@ const DayCard = ({ day, i, setActiveDayIndex, activeDayIndex }) => {
       : 'day-card-wrapper';
   return (
     <Col xs="12" md className={dayCardWrapperStyle}>
-      <div className="day-card" onClick={() => setActiveDayIndex(i)}>
+      <div
+        className="day-card"
+        onClick={() => setActiveDayIndex(i)}
+        role="button"
+      >
         <Row noGutters>
           <Col xs="4" sm="3" md="12" className="day-card__item">
             <div className="day-card__day-name">

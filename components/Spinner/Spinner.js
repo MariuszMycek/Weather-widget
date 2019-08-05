@@ -8,7 +8,7 @@ const Spinner = ({ height }) => (
 );
 
 Spinner.propTypes = {
-  height: PropTypes.number.isRequired,
+  height: PropTypes.string.isRequired,
 };
 
 export default Spinner;

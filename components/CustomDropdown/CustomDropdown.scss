@@ -1,0 +1,50 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.custom-dropdown {
+  display: flex;
+
+  &__spinner-wrapper {
+    transform: translate(-42px, -2px);
+
+    @include media-breakpoint-down(xs) {
+      transform: translate(-24px, -3px);
+    }
+  }
+
+  .show.dropdown {
+    .dropdown-toggle {
+      box-shadow: none;
+    }
+  }
+
+  .dropdown {
+    .dropdown-toggle {
+      height: 100%;
+      line-height: 1;
+      font-size: 54px;
+      padding: 0;
+      color: $font-dark;
+      background: $widget-bg;
+      border: none;
+      box-shadow: none;
+
+      &:after {
+        margin-left: 0.4em;
+      }
+
+      &:active {
+        background: $widget-bg;
+        color: $font-dark;
+      }
+
+      &:focus:active {
+        box-shadow: none;
+      }
+
+      @include media-breakpoint-down(xs) {
+        font-size: 30px;
+      }
+    }
+  }
+}
