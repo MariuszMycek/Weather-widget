@@ -99,6 +99,14 @@
       align-items: center;
     }
 
+    .short-info-pollen__name {
+      margin-right: 0.5em;
+
+      @include media-breakpoint-down(xs) {
+       margin-right: 0;
+      }
+    }
+
     .short-info-pollen__count {
       font-weight: 700;
       color: $font-dark-grey;

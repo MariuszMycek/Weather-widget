@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './style.scss';
+import './Spinner.scss';
 
-const Spinner = ({ height = '100%' }) => {
+const Spinner = props => {
+  const { height = '100%' } = props;
   return <img src="static/spinner.svg" alt="" style={{ height }} />;
 };
 

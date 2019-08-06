@@ -3,11 +3,12 @@ import fetch from 'isomorphic-unfetch';
 import moment from 'moment';
 
 import Container from 'react-bootstrap/Container';
-import Spinner from '../Spinner';
+import WidgetLoadingError from './WidgetLoadingError';
+import WidgetLoader from './WidgetLoader';
 import WidgetBody from './WidgetBody';
-import CustomDropdown from '../CustomDropdown';
+import WidgetHeader from './WidgetHeader';
 
-import './style.scss';
+import './WeatherWidget.scss';
 
 // API url
 const API = 'https://dev-weather-api.azurewebsites.net/api/city';
@@ -69,60 +70,40 @@ class WeatherWidget extends Component {
     this.setState({ activeDayIndex });
   };
 
-  // function to render spinner while page is loading
-  renderSpinner = () => (
-    <div className="widget-loader">
-      <Spinner height="50px" />
-    </div>
-  );
-
   // function to render Weather Widget app
   renderWidget = () => {
     return (
       <Container fluid>
         <div className="weather-widget">
-          <div className="weather-widget__header">
-            <Container fluid>
-              {/* App header - city name in dropdown form */}
-              <CustomDropdown
-                {...this.state}
-                onSelectHandler={this.onSelectHandler}
-              />
-            </Container>
-          </div>
-          <div className="weather-widget__body">
-            <Container fluid>
-              {/* Widget body with weather data for chosen city */}
-              <WidgetBody
-                {...this.state}
-                setActiveDayIndex={this.setActiveDayIndex}
-                onSelectHandler={this.onSelectHandler}
-              />
-            </Container>
-          </div>
+          {/* App header - city name in dropdown form */}
+          <WidgetHeader
+            {...this.state}
+            onSelectHandler={this.onSelectHandler}
+          />
+          {/* Widget body with weather data for chosen city */}
+          <WidgetBody
+            {...this.state}
+            setActiveDayIndex={this.setActiveDayIndex}
+            onSelectHandler={this.onSelectHandler}
+          />
         </div>
       </Container>
     );
   };
-
-  // Function to render info when data cannot be fetch
-  renderErrorInfo = () => (
-    <div className="widget-no-data-info">Sorry, we cannot get cities list</div>
-  );
 
   render() {
     const { isLoading, citiesData } = this.state;
 
     // if page is loading for the first time
     if (isLoading) {
-      return this.renderSpinner();
+      return <WidgetLoader />;
     }
     // if data is fetched and everything is ok
     if (citiesData) {
       return this.renderWidget();
     }
     // if above conditions are not met - cannot fetch from API
-    return this.renderErrorInfo();
+    return <WidgetLoadingError />;
   }
 }
 

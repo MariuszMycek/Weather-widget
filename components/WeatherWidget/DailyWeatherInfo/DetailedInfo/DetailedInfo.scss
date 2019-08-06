@@ -1,0 +1,79 @@
+@import 'styles/variables';
+@import 'styles/mixins';
+
+.detailed-info {
+  margin-top: 10px;
+
+  .img-and-temp {
+    display: flex;
+    flex-wrap: wrap;
+
+    &__weather-image {
+      img {
+        @include media-breakpoint-down(xs) {
+          width: 90%;
+        }
+      }
+    }
+
+    &__temperature {
+      display: flex;
+      font-weight: 600;
+      transform: translateY(-2px);
+
+      @include media-breakpoint-down(xs) {
+        transform: translateY(0);
+      }
+
+      .temperature__count {
+        margin-left: 5px;
+        font-size: 44px;
+
+        @include media-breakpoint-down(xs) {
+          font-size: 32px;
+          margin-left: 3px;
+        }
+      }
+    }
+
+    .temperature__degree-type {
+      font-size: 18px;
+      align-self: flex-start;
+      transform: translateY(3px);
+      color: $font-light-grey;
+      margin-left: 0.1em;
+
+      @include media-breakpoint-down(xs) {
+        font-size: 12px;
+      }
+    }
+  }
+
+  .additional-info {
+    display: flex;
+    flex-direction: column;
+
+    @include media-breakpoint-down(xs) {
+      font-size: 12px;
+    }
+
+    &__item-wrapper {
+      margin-bottom: 10px;
+      color: $font-light-grey;
+
+      @include media-breakpoint-down(xs) {
+        margin-bottom: 5px;
+      }
+    }
+
+    &__name {
+      font-weight: 600;
+      margin-right: 0.5em;
+    }
+
+    &__content {
+      color: $font-dark-grey;
+      font-weight: 700;
+    }
+  }
+}

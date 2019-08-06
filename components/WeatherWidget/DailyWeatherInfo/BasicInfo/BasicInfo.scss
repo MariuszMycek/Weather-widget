@@ -1,0 +1,19 @@
+@import 'styles/variables';
+@import 'styles/mixins';
+
+.basic-info {
+  &__date-and-type {
+    display: flex;
+    flex-direction: column;
+    font-weight: 700;
+    color: $font-dark-grey;
+
+    @include media-breakpoint-down(xs) {
+      font-size: 12px;
+    }
+  }
+
+  &__date {
+    margin-bottom: 8px;
+  }
+}

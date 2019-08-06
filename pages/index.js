@@ -1,5 +1,5 @@
 import React from 'react';
-import Head from '../components/Hhead';
+import Head from '../components/Head';
 import WeatherWidget from '../components/WeatherWidget';
 
 const Home = () => (

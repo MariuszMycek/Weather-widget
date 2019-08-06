@@ -5,9 +5,10 @@ import moment from 'moment';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import './style.scss';
+import './DayCard.scss';
 
-const DayCard = ({ day, i, setActiveDayIndex, activeDayIndex }) => {
+const DayCard = props => {
+  const { day, i, setActiveDayIndex, activeDayIndex } = props;
   // handling class names for Day Card in mobile view
   const dayCardWrapperStyle =
     activeDayIndex === i
@@ -42,7 +43,7 @@ const DayCard = ({ day, i, setActiveDayIndex, activeDayIndex }) => {
           </Col>
           <Col xs="3" sm="3" md="12" className="day-card__item">
             <div className="day-card__short-info-pollen">
-              <span className="short-info-pollen__name">Pollen </span>
+              <span className="short-info-pollen__name">Pollen</span>
               <span className="short-info-pollen__count">
                 {day.pollenCount}
               </span>

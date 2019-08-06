@@ -1,20 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
-import formatWeatherType from 'utils/formatWeatherType';
 
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import DayCard from '../DayCard';
+import Container from 'react-bootstrap/Container';
 
-import './style.scss';
+import DailyWeatherInfo from '../DailyWeatherInfo';
+import MultiDayForecast from '../MultiDayForecast';
 
-const WidgetBody = ({
-  cityData,
-  setActiveDayIndex,
-  activeDayIndex,
-  cityDataLoading,
-}) => {
+import './WidgetBody.scss';
+
+const WidgetBody = props => {
+  const { cityData, cityDataLoading } = props;
+
   // if there is a problem with fething chosen city data
   if (!cityDataLoading && !cityData) {
     return <div>Sorry, we cannot get city data</div>;
@@ -22,87 +18,13 @@ const WidgetBody = ({
 
   // if everything is ok - cityData is not null or empty array
   if (cityData && cityData.length) {
-    // data for currently displayed day
-    const dailyData = cityData[activeDayIndex];
-    const date = moment(dailyData.date).format('dddd[, ]MMMM[ ]Do');
-    const weatherType = formatWeatherType(dailyData.type);
     return (
-      <div className="widget-body">
-        <div className="daily-weather-info">
-          <Row>
-            <Col className="daily-weather-info__basic-info">
-              <span className="daily-weather-info__date">{date}</span>
-              <span className="daily-weather-info__weather-type">
-                {weatherType}
-              </span>
-            </Col>
-          </Row>
-          <Row className="daily-weather-info__detailed-info">
-            <Col xs="6" className="daily-weather-info__img-and-temp">
-              <div className="daily-weather-info__weather-image">
-                <img
-                  src={`static/assets/images/${dailyData.type}.png`}
-                  alt="weather icon"
-                />
-              </div>
-              <div className="daily-weather-info__temperature">
-                <span className="temperature__count">
-                  {dailyData.temperature}
-                </span>
-                <span className="temperature__degree-type">&deg;C</span>
-              </div>
-            </Col>
-            <Col xs="6" className="daily-weather-info__additional-info">
-              <div className="daily-weather-info__additional-info-item-wrapper">
-                <span className="daily-weather-info__additional-info-name">
-                  Precipitation:{' '}
-                </span>
-                <span className="daily-weather-info__additional-info-content">
-                  {dailyData.precipitation}%
-                </span>
-              </div>
-              <div className="daily-weather-info__additional-info-item-wrapper">
-                <span className="daily-weather-info__additional-info-name">
-                  Humidity:{' '}
-                </span>
-                <span className="daily-weather-info__additional-info-content">
-                  {dailyData.humidity}%
-                </span>
-              </div>
-              <div className="daily-weather-info__additional-info-item-wrapper">
-                <span className="daily-weather-info__additional-info-name">
-                  Wind:{' '}
-                </span>
-                <span className="daily-weather-info__additional-info-content">
-                  {dailyData.windInfo.speed} mph {dailyData.windInfo.direction}
-                </span>
-              </div>
-              <div className="daily-weather-info__additional-info-item-wrapper">
-                <span className="daily-weather-info__additional-info-name">
-                  Pollen Count:{' '}
-                </span>
-                <span className="daily-weather-info__additional-info-content">
-                  {dailyData.pollenCount}
-                </span>
-              </div>
-            </Col>
-          </Row>
+      <Container fluid>
+        <div className="widget-body">
+          <DailyWeatherInfo {...props} />
+          <MultiDayForecast {...props} />
         </div>
-        <div className="multi-day-forecast">
-          <Row>
-            {/* Rendering weather data for multi day forecast */}
-            {cityData.map((day, i) => (
-              <DayCard
-                key={day.date}
-                day={day}
-                i={i}
-                setActiveDayIndex={setActiveDayIndex}
-                activeDayIndex={activeDayIndex}
-              />
-            ))}
-          </Row>
-        </div>
-      </div>
+      </Container>
     );
   }
 
@@ -111,8 +33,6 @@ const WidgetBody = ({
 
 WidgetBody.propTypes = {
   cityData: PropTypes.array,
-  setActiveDayIndex: PropTypes.func,
-  activeDayIndex: PropTypes.number,
   cityDataLoading: PropTypes.bool,
 };
 

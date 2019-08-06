@@ -13,6 +13,7 @@ module.exports = withSass({
       alias: {
         utils: path.resolve(__dirname, 'utils'),
         styles: path.resolve(__dirname, 'styles'),
+        shared: path.resolve(__dirname, 'components/shared'),
       },
     };
     return config;

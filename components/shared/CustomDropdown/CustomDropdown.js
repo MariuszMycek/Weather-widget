@@ -5,15 +5,11 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Spinner from '../Spinner';
 
-import './style.scss';
+import './CustomDropdown.scss';
 
 // Modified React-Bootstrap dropdown
-const CustomDropdown = ({
-  activeCity,
-  citiesData,
-  onSelectHandler,
-  cityDataLoading,
-}) => {
+const CustomDropdown = props => {
+  const { activeCity, citiesData, onSelectHandler, cityDataLoading } = props;
   return (
     <div className="custom-dropdown">
       {/* Header/dropdown - City name  */}
