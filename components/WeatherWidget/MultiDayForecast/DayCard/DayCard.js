@@ -7,12 +7,16 @@ import Col from 'react-bootstrap/Col';
 
 import './DayCard.scss';
 
-const DayCard = ({ day, i, setActiveDayIndex, activeDayIndex }) => {
+const DayCard = props => {
+  const { day, i, setActiveDayIndex, activeDayIndex } = props;
   // handling class names for Day Card in mobile view
   const dayCardWrapperStyle =
     activeDayIndex === i
       ? 'day-card-wrapper day-card-wrapper--active'
       : 'day-card-wrapper';
+  // displaying "Today" if i(index) === 0, and week day name for other days
+  const dayName = i === 0 ? 'Today' : moment(day.date).format('dddd');
+
   return (
     <Col xs="12" md className={dayCardWrapperStyle}>
       <div
@@ -22,14 +26,7 @@ const DayCard = ({ day, i, setActiveDayIndex, activeDayIndex }) => {
       >
         <Row noGutters>
           <Col xs="4" sm="3" md="12" className="day-card__item">
-            <div className="day-card__day-name">
-              {/* Displaying "Today" if i(index) === 0, and week day name for other days */}
-              {i === 0 ? (
-                <span>Today</span>
-              ) : (
-                <span>{moment(day.date).format('dddd')}</span>
-              )}
-            </div>
+            <div className="day-card__day-name">{dayName}</div>
           </Col>
           <Col xs="3" sm="3" md="12" className="day-card__item">
             <div className="day-card__weather-image">
@@ -46,7 +43,7 @@ const DayCard = ({ day, i, setActiveDayIndex, activeDayIndex }) => {
           </Col>
           <Col xs="3" sm="3" md="12" className="day-card__item">
             <div className="day-card__short-info-pollen">
-              <span className="short-info-pollen__name">Pollen </span>
+              <span className="short-info-pollen__name">Pollen</span>
               <span className="short-info-pollen__count">
                 {day.pollenCount}
               </span>

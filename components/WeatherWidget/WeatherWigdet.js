@@ -3,9 +3,10 @@ import fetch from 'isomorphic-unfetch';
 import moment from 'moment';
 
 import Container from 'react-bootstrap/Container';
-import Spinner from '../Spinner/Spinner';
-import WidgetBody from './WidgetBody/WidgetBody';
-import CustomDropdown from '../CustomDropdown/CustomDropdown';
+import WidgetLoadingError from './WidgetLoadingError';
+import WidgetLoader from './WidgetLoader';
+import WidgetBody from './WidgetBody';
+import WidgetHeader from './WidgetHeader';
 
 import './WeatherWidget.scss';
 
@@ -35,11 +36,11 @@ class WeatherWidget extends Component {
     fetch(API)
       .then(res => res.json())
       // when success - assigning fetched data to proper state
-      // and change page loading state to false for spinner hiding
-      .then(data => this.setState({ citiesData: data, isLoading: false }))
+      .then(data => this.setState({ citiesData: data }))
       // if cannot fetch the data, setting 'citiesData` to null
       // and change page loading state to false
-      .catch(() => this.setState({ citiesData: null, isLoading: false }));
+      .catch(() => this.setState({ citiesData: null }))
+      .finally(() => this.setState({ isLoading: false }));
   }
 
   // Handler triggered if city si chosen from dropdown list
@@ -55,13 +56,13 @@ class WeatherWidget extends Component {
     fetch(`${API}/${activeCity.id}/weather?date=${date}`)
       .then(res => res.json())
       // when success - assigning city data o state
-      // and setting city data loading state to false for spinner hiding
       .then(cityData => {
-        this.setState({ cityData, cityDataLoading: false });
+        this.setState({ cityData });
       })
       // if cannot fetch the data, setting 'cityData` to null
       // and change loading state to false
-      .catch(() => this.setState({ cityData: null, cityDataLoading: false }));
+      .catch(() => this.setState({ cityData: null }))
+      .finally(() => this.setState({ cityDataLoading: false }));
   };
 
   // function to setting active (for example: clicked) day index
@@ -69,73 +70,40 @@ class WeatherWidget extends Component {
     this.setState({ activeDayIndex });
   };
 
-  // function to render spinner while page is loading
-  renderSpinner = () => (
-    <div className="widget-loader">
-      <Spinner height="50px" />
-    </div>
-  );
-
   // function to render Weather Widget app
   renderWidget = () => {
-    const {
-      citiesData,
-      activeCity,
-      cityData,
-      activeDayIndex,
-      cityDataLoading,
-    } = this.state;
     return (
       <Container fluid>
         <div className="weather-widget">
-          <div className="weather-widget__header">
-            <Container fluid>
-              {/* App header - city name in dropdown form */}
-              <CustomDropdown
-                activeCity={activeCity}
-                citiesData={citiesData}
-                onSelectHandler={this.onSelectHandler}
-                cityDataLoading={cityDataLoading}
-              />
-            </Container>
-          </div>
-          <div className="weather-widget__body">
-            <Container fluid>
-              {/* Widget body with weather data for chosen city */}
-              <WidgetBody
-                cityData={cityData}
-                citiesData={citiesData}
-                activeCity={activeCity}
-                setActiveDayIndex={this.setActiveDayIndex}
-                activeDayIndex={activeDayIndex}
-                cityDataLoading={cityDataLoading}
-                onSelectHandler={this.onSelectHandler}
-              />
-            </Container>
-          </div>
+          {/* App header - city name in dropdown form */}
+          <WidgetHeader
+            {...this.state}
+            onSelectHandler={this.onSelectHandler}
+          />
+          {/* Widget body with weather data for chosen city */}
+          <WidgetBody
+            {...this.state}
+            setActiveDayIndex={this.setActiveDayIndex}
+            onSelectHandler={this.onSelectHandler}
+          />
         </div>
       </Container>
     );
   };
-
-  // Function to render info when data cannot be fetch
-  renderErrorInfo = () => (
-    <div className="widget-no-data-info">Sorry, we cannot get cities list</div>
-  );
 
   render() {
     const { isLoading, citiesData } = this.state;
 
     // if page is loading for the first time
     if (isLoading) {
-      return this.renderSpinner();
+      return <WidgetLoader />;
     }
     // if data is fetched and everything is ok
     if (citiesData) {
       return this.renderWidget();
     }
     // if above conditions are not met - cannot fetch from API
-    return this.renderErrorInfo();
+    return <WidgetLoadingError />;
   }
 }
 

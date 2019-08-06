@@ -1,15 +1,5 @@
-@import '../../styles/variables';
-@import '../../styles/mixins';
-
-.widget-loader {
-  margin-top: 60px;
-  display: flex;
-  justify-content: center;
-}
-
-.widget-no-data-info {
-  @extend .widget-loader;
-}
+@import 'styles/variables';
+@import 'styles/mixins';
 
 .weather-widget {
   margin: 15px auto 30px;
@@ -20,9 +10,5 @@
   @include media-breakpoint-down(sm) {
     padding-top: 10px;
     padding-bottom: 0;
-  }
-
-  &__header {
-    padding-bottom: 10px;
   }
 }

@@ -1,5 +1,5 @@
-@import '../../../styles/variables';
-@import '../../../styles/mixins';
+@import 'styles/variables';
+@import 'styles/mixins';
 
 .day-card-wrapper {
   background: $widget-bg;
@@ -97,6 +97,14 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+    }
+
+    .short-info-pollen__name {
+      margin-right: 0.5em;
+
+      @include media-breakpoint-down(xs) {
+       margin-right: 0;
+      }
     }
 
     .short-info-pollen__count {

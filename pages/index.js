@@ -1,6 +1,6 @@
 import React from 'react';
-import Head from '../components/head';
-import WeatherWidget from '..//components/WeatherWidget/WeatherWigdet';
+import Head from '../components/Head';
+import WeatherWidget from '../components/WeatherWidget';
 
 const Home = () => (
   <div>
