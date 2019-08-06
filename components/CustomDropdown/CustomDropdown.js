@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import Spinner from '../Sspinner';
+import Spinner from '../Spinner';
 
-import './CustomDropdown.scss';
+import './style.scss';
 
 // Modified React-Bootstrap dropdown
 const CustomDropdown = ({

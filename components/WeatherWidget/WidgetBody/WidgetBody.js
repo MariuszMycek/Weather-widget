@@ -7,7 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import DayCard from '../DayCard';
 
-import './WidgetBody.scss';
+import './style.scss';
 
 const WidgetBody = ({
   cityData,

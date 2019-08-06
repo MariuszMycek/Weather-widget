@@ -7,7 +7,7 @@ import Spinner from '../Spinner';
 import WidgetBody from './WidgetBody';
 import CustomDropdown from '../CustomDropdown';
 
-import './WeatherWidget.scss';
+import './style.scss';
 
 // API url
 const API = 'https://dev-weather-api.azurewebsites.net/api/city';

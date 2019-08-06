@@ -5,7 +5,7 @@ import moment from 'moment';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import './DayCard.scss';
+import './style.scss';
 
 const DayCard = ({ day, i, setActiveDayIndex, activeDayIndex }) => {
   // handling class names for Day Card in mobile view

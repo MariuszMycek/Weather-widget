@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './Spinner.scss';
+import './style.scss';
 
 const Spinner = ({ height = '100%' }) => {
   return <img src="static/spinner.svg" alt="" style={{ height }} />;
