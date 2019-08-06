@@ -1,32 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import formatWeatherType from 'utils/formatWeatherType';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import DayCard from '../DayCard/DayCard';
+import DayCard from '../DayCard';
 
 import './WidgetBody.scss';
-
-// function for formating weather type name received from API
-function formatType(type) {
-  // adding space between words
-  const withSpace =
-    type !== 'RainLight'
-      ? type.replace(/([a-z])(?=[A-Z])/g, '$1 ')
-      : // reversing 'RainLight' to 'Light Rain'
-        type
-          .replace(/([a-z])(?=[A-Z])/g, '$1 ')
-          .split(' ')
-          .reverse()
-          .join(' ');
-  // changing letters to lower case
-  const toLowerCase = withSpace.toLowerCase();
-  // changing first letter to capital one
-  const capitalized =
-    toLowerCase.charAt(0).toUpperCase() + toLowerCase.slice(1);
-  return capitalized;
-}
 
 const WidgetBody = ({
   cityData,
@@ -44,7 +25,7 @@ const WidgetBody = ({
     // data for currently displayed day
     const dailyData = cityData[activeDayIndex];
     const date = moment(dailyData.date).format('dddd[, ]MMMM[ ]Do');
-    const weatherType = formatType(dailyData.type);
+    const weatherType = formatWeatherType(dailyData.type);
     return (
       <div className="widget-body">
         <div className="daily-weather-info">

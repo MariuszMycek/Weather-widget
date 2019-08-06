@@ -3,9 +3,9 @@ import fetch from 'isomorphic-unfetch';
 import moment from 'moment';
 
 import Container from 'react-bootstrap/Container';
-import Spinner from '../Spinner/Spinner';
-import WidgetBody from './WidgetBody/WidgetBody';
-import CustomDropdown from '../CustomDropdown/CustomDropdown';
+import Spinner from '../Spinner';
+import WidgetBody from './WidgetBody';
+import CustomDropdown from '../CustomDropdown';
 
 import './WeatherWidget.scss';
 
@@ -35,11 +35,11 @@ class WeatherWidget extends Component {
     fetch(API)
       .then(res => res.json())
       // when success - assigning fetched data to proper state
-      // and change page loading state to false for spinner hiding
-      .then(data => this.setState({ citiesData: data, isLoading: false }))
+      .then(data => this.setState({ citiesData: data }))
       // if cannot fetch the data, setting 'citiesData` to null
       // and change page loading state to false
-      .catch(() => this.setState({ citiesData: null, isLoading: false }));
+      .catch(() => this.setState({ citiesData: null }))
+      .finally(() => this.setState({ isLoading: false }));
   }
 
   // Handler triggered if city si chosen from dropdown list
@@ -55,13 +55,13 @@ class WeatherWidget extends Component {
     fetch(`${API}/${activeCity.id}/weather?date=${date}`)
       .then(res => res.json())
       // when success - assigning city data o state
-      // and setting city data loading state to false for spinner hiding
       .then(cityData => {
-        this.setState({ cityData, cityDataLoading: false });
+        this.setState({ cityData });
       })
       // if cannot fetch the data, setting 'cityData` to null
       // and change loading state to false
-      .catch(() => this.setState({ cityData: null, cityDataLoading: false }));
+      .catch(() => this.setState({ cityData: null }))
+      .finally(() => this.setState({ cityDataLoading: false }));
   };
 
   // function to setting active (for example: clicked) day index
@@ -78,13 +78,6 @@ class WeatherWidget extends Component {
 
   // function to render Weather Widget app
   renderWidget = () => {
-    const {
-      citiesData,
-      activeCity,
-      cityData,
-      activeDayIndex,
-      cityDataLoading,
-    } = this.state;
     return (
       <Container fluid>
         <div className="weather-widget">
@@ -92,10 +85,8 @@ class WeatherWidget extends Component {
             <Container fluid>
               {/* App header - city name in dropdown form */}
               <CustomDropdown
-                activeCity={activeCity}
-                citiesData={citiesData}
+                {...this.state}
                 onSelectHandler={this.onSelectHandler}
-                cityDataLoading={cityDataLoading}
               />
             </Container>
           </div>
@@ -103,12 +94,8 @@ class WeatherWidget extends Component {
             <Container fluid>
               {/* Widget body with weather data for chosen city */}
               <WidgetBody
-                cityData={cityData}
-                citiesData={citiesData}
-                activeCity={activeCity}
+                {...this.state}
                 setActiveDayIndex={this.setActiveDayIndex}
-                activeDayIndex={activeDayIndex}
-                cityDataLoading={cityDataLoading}
                 onSelectHandler={this.onSelectHandler}
               />
             </Container>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import Spinner from '../Spinner/Spinner';
+import Spinner from '../Sspinner';
 
 import './CustomDropdown.scss';
 
@@ -37,7 +37,7 @@ const CustomDropdown = ({
       {/* Displaying spinner while city data is loading */}
       {cityDataLoading ? (
         <div className="custom-dropdown__spinner-wrapper">
-          <Spinner height="100%" />
+          <Spinner />
         </div>
       ) : null}
     </div>
